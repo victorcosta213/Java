@@ -2,14 +2,17 @@ package entities;
 
 import entities.enuns.OrderStatus;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Order {
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private Date moment;
     private OrderStatus status;
     private List<OrderItem> items= new ArrayList<>();
+
 
     public Order() {
     }
@@ -45,5 +48,15 @@ public class Order {
 
     public void removeItem(OrderItem item){
         this.items.remove(item);
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order moment: "+ sdf.format(this.moment));
+        sb.append("Order Status: "+ OrderStatus.PROCESSING);
+        sb.append("Client: "+this.items.get(0).getC1().getName()+" - "+this.items.get(0).getC1().getEmail());
+        sb.append("Order Items: \n");
+
+        return sb.toString();
     }
 }
