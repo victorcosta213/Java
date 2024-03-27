@@ -7,14 +7,22 @@ import entities.SavingsAccount;
 public class Main {
     public static void main(String[] args) {
 
-        Account acc = new Account(1001,"Alex",0);
+        Account acc = new Account(1001,"Alex",1000);
+        acc.withdrawn(200);
+        System.out.println(acc.getBalance());
         BusinessAccount bacc = new BusinessAccount(1002,"maria",0,500);
 
         //UPCASTING: conta empresarial é um tipo de conta.
 
         Account acc1 = bacc;
-        Account acc2 = new BusinessAccount(1003,"bob",0,200);
-        Account acc3 = new SavingsAccount(1004,"Ana",0,0.01);
+        Account acc2 = new BusinessAccount(1003,"bob",1000,500);
+        acc2.withdrawn(200);
+        System.out.println(acc2.getBalance());
+
+        Account acc3 = new SavingsAccount(1004,"Ana",1000,0.01);
+        acc3.withdrawn(200);
+        System.out.println(acc3.getBalance());
+
 
         //DOWNCASTING
 
