@@ -27,13 +27,13 @@ public class Main {
 
         System.out.println("Enter ordem Data: ");
         System.out.print("Status: ");
-        OrderStatus.valueOf(sc.next());
+        Order o1= new Order(new Date(),OrderStatus.valueOf(sc.next()),c1);
         System.out.print("How many items to this order? ");
         int op = sc.nextInt();
-        Order o1 = new Order();
 
-        for (int i=1; i< op;i++){
-            System.out.println("Enter #"+i+" item data: ");
+
+        for (int i=0; i< op;i++){
+            System.out.println("Enter #"+(i+1)+" item data: ");
             System.out.print("Product name: ");
             String np= sc.next();
             System.out.print("Product price: ");
@@ -41,14 +41,13 @@ public class Main {
             System.out.print("Quantity: ");
             int q = sc.nextInt();
             Product p1 = new Product(np,price);
-            OrderItem orderI = new OrderItem(q,price,p1,c1);
-            o1= new Order(new Date(),OrderStatus.PROCESSING);
+            OrderItem orderI = new OrderItem(q,price,p1);
             o1.addItem(orderI);
 
         }
 
-        System.out.println("ORDER SUMMARY");
-        System.out.println(o1.toString());
+        System.out.println(o1);;
+
 
 
 
