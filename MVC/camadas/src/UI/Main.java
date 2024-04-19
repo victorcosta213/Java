@@ -22,20 +22,28 @@ public class Main {
             System.out.println("2- Remover Conta");
             System.out.println("3- Alterar Conta");
             System.out.println("4- Buscar Conta");
-            System.out.println("5- Buscar todas contas");
+            System.out.println("5- Relatorio de todas contas");
             System.out.println("6- Sair");
             System.out.print("Escolha uma opção: ");
             short op =sc.nextShort();
             switch (op){
                 case 1:
                     try {
+                        double saldo = 0;
                         System.out.print("Numero da Conta: ");
                         int numeroConta = sc.nextInt();
                         sc.nextLine();
                         System.out.print("Titular da Conta: ");
                         String titular = sc.nextLine();
-                        Conta c = new Conta(numeroConta,titular,0);
+                        System.out.print("Deseja fazer um deposito inicial(s/n): ");
+                        char dc = sc.next().charAt(0);
+                        if (dc == 's'){
+                            System.out.print("Insira o valor inicial: R$ ");
+                            saldo = sc.nextDouble();
+                        }
+                        Conta c = new Conta(numeroConta,titular,saldo);
                         cliente.inserirConta(c);
+
                     }catch (ContaJaExisteException e){
                         System.out.println(e.getMessage());
                     }
@@ -46,8 +54,9 @@ public class Main {
                         System.out.print("Numero da Conta: ");
                         int numero=sc.nextInt();
                         cliente.removerConta(numero);
+                        System.out.println("Conta removida com sucesso!");
                     }catch (ConcurrentModificationException e){
-                        System.out.println("Nenhuma conta cadastrada!");
+                        System.out.println("Lista de contas está vazia!");
                     }
                     break;
 

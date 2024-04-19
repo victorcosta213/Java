@@ -5,9 +5,6 @@ public class Conta {
     private String titular;
     private double saldo;
 
-    public Conta() {
-        this.saldo =0;
-    }
 
     public Conta(int numero, String titular, double saldo) {
         this.numero = numero;
