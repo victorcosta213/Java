@@ -2,10 +2,9 @@ package com.vcm.app.controller;
 
 import com.vcm.app.dto.UserDTO;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -59,6 +58,21 @@ public class UserController {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("User not found."));
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDTO inserir(@RequestBody @Valid UserDTO userDTO) {
+        userDTO.setDataCadastro(LocalDateTime.now());
+        usuarios.add(userDTO);
+        return userDTO;
+    }
+
+
+    @DeleteMapping("/{cpf}")
+    public boolean remover(@PathVariable String cpf) {
+        return usuarios.removeIf(UserDTO -> UserDTO.getCpf().equals(cpf));
+    }
+
 
 
 
